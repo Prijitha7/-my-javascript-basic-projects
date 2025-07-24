@@ -7,10 +7,15 @@ btn.addEventListener("click", function () {
   for (let i = 0; i < 6; i++) {
     hexColor += hex[getRandomNumber()];
   }
-  // console.log(hexColor);
-
-  color.textContent = hexColor;
+  color.textContent = hexColor.toUpperCase();
   document.body.style.backgroundColor = hexColor;
+  btn.textContent = "Change Again!";
+});
+
+// Copy color to clipboard on click
+color.addEventListener("click", function () {
+  navigator.clipboard.writeText(color.textContent);
+  alert("Color copied: " + color.textContent);
 });
 
 function getRandomNumber() {
