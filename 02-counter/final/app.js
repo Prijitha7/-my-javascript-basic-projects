@@ -1,32 +1,34 @@
-// set inital value to zero
-// Initial count value
-let count = 0;
+// Counter App - Modified Version for Contribution
+
+let counterValue = 0; // Start with 0
 
 // Select value display and all buttons
-const value = document.querySelector("#value");
-const btns = document.querySelectorAll(".btn");
+const valueDisplay = document.querySelector("#value");
+const buttons = document.querySelectorAll(".btn");
 
-// Loop through each button and add click events
-btns.forEach(function (btn) {
-  btn.addEventListener("click", function (e) {
-    const styles = e.currentTarget.classList;
+// Function to update color based on value
+const updateColor = () => {
+  valueDisplay.style.color = counterValue > 0 ? "green" :
+                             counterValue < 0 ? "red" : "#222";
+};
 
-    // Update count based on button clicked
-    switch (true) {
-      case styles.contains("decrease"):
-        count--;
-        break;
-      case styles.contains("increase"):
-        count++;
-        break;
-      default:
-        count = 0;
-    }
+// Function to update the display with animation
+const updateDisplay = () => {
+  valueDisplay.textContent = counterValue;
+  valueDisplay.style.opacity = "0.5";
+  setTimeout(() => (valueDisplay.style.opacity = "1"), 150);
+};
 
-    // Change color based on value
-    value.style.color = count > 0 ? "green" : count < 0 ? "red" : "#222";
+// Event listener for buttons
+buttons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const classes = e.currentTarget.classList;
 
-    // Update display
-    value.textContent = count;
+    if (classes.contains("decrease")) counterValue--;
+    else if (classes.contains("increase")) counterValue++;
+    else counterValue = 0;
+
+    updateColor();
+    updateDisplay();
   });
 });
