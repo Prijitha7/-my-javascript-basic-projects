@@ -1,29 +1,32 @@
 // set inital value to zero
+// Initial count value
 let count = 0;
-// select value and buttons
+
+// Select value display and all buttons
 const value = document.querySelector("#value");
 const btns = document.querySelectorAll(".btn");
 
+// Loop through each button and add click events
 btns.forEach(function (btn) {
   btn.addEventListener("click", function (e) {
     const styles = e.currentTarget.classList;
-    if (styles.contains("decrease")) {
-      count--;
-    } else if (styles.contains("increase")) {
-      count++;
-    } else {
-      count = 0;
+
+    // Update count based on button clicked
+    switch (true) {
+      case styles.contains("decrease"):
+        count--;
+        break;
+      case styles.contains("increase"):
+        count++;
+        break;
+      default:
+        count = 0;
     }
 
-    if (count > 0) {
-      value.style.color = "green";
-    }
-    if (count < 0) {
-      value.style.color = "red";
-    }
-    if (count === 0) {
-      value.style.color = "#222";
-    }
+    // Change color based on value
+    value.style.color = count > 0 ? "green" : count < 0 ? "red" : "#222";
+
+    // Update display
     value.textContent = count;
   });
 });
